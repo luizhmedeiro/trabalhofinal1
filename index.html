@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+	<title>Trabalho AngularJS Aplication</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css">
+	<script src="vendor/angularjs/angular.js"></script>
+	<script src="aplication/js/myApp.js"></script>
+	<script src="aplication/js/controller/MeuController.js"></script>
+</head>
+<body ng-controller="MeuController">
+	<div class="container">
+		<div class="row">
+			<h1>{{isEdit ? 'Editar' :'Cadastrar'}}</h1>
+			<div class="col-sm-4">
+				<form ng-if="!isEdit" ng-submit="adicionarDados(pessoa)">
+					<div class="form-group">
+						<div class="form-group">
+			    			<label>Nome</label>
+			    			<input required minlength="3" ng-model = "pessoa.nome" type="text" class="form-control" placeholder="Nome">
+			  			</div>
+						<div class="form-group">
+			    			<label>E-mail</label>
+			    			<input required ng-model="pessoa.email" type="email" class="form-control" placeholder="E-mail">
+			  			</div>
+			  			<div class="form-group">
+			    			<label>Telefone</label>
+			    			<input required minlength="8" ng-model="pessoa.telefone" type="text" class="form-control" placeholder="Telefone">
+			  			</div>
+			  			<div class="col-sm-12">
+			  				<button type="submit" class="btn btn-primary pull-right">Adicionar</button>
+			  			</div>
+
+						<div class="clearfix"></div>	  			
+					</div>
+				</form>
+			 	<form ng-if="isEdit" ng-submit="editarDados(pessoa)">
+					<div class="form-group">
+						<div class="form-group">
+			    			<label>Nome</label>
+			    			<input required minlength="3" ng-model = "pessoa.nome" type="text" class="form-control" placeholder="Nome">
+			  			</div>
+						<div class="form-group">
+			    			<label>E-mail</label>
+			    			<input required ng-model="pessoa.email" type="email" class="form-control" placeholder="E-mail">
+			  			</div>
+			  			<div class="form-group">
+			    			<label>Telefone</label>
+			    			<input required minlength="8" ng-model="pessoa.telefone" type="text" class="form-control" placeholder="Telefone">
+			  			</div>		  			
+			  			<div class="col-sm-9">
+			  				<button type="submit" class="btn btn-success pull-right">Salvar</button>
+			  			</div>
+			  			<div class="col-sm-3">
+			  				<button ng-click="cancelar()" class="btn btn-danger pull-right">Cancelar</button>	
+			  			</div>
+
+						<div class="clearfix"></div>	  
+						<br>			
+
+						Aviso: os dados são salvos <br>
+						automaticamente
+					</div>
+				</form>
+
+			</div>
+			<div class="col-sm-8">
+				<table class="table table-bordered table-sm">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>E-mail</th>
+							<th>Telefone</th>
+							<th>Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="item in dados">
+							<td>{{item.nome}}</td>
+							<td>{{item.email}}</td>
+							<td>{{item.telefone}}</td>
+							<td><button ng-click="excluirItem($index)" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button> /
+							 	<button ng-click="editarItem(item, $index)" class="btn btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+							</td>
+						</tr>
+					</tbody>			
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
